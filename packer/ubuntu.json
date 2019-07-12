@@ -1,0 +1,28 @@
+{
+  "variables": {
+    "nomad_version": "{{env `NOMAD_VERSION`}}",
+    "consul_version": "{{env `CONSUL_VERSION`}}"
+  },
+  "builders": [
+    {
+      "communicator": "ssh",
+      "source_path": "{{ user `box` }}",
+      "provider": "virtualbox",
+      "add_force": false,
+      "skip_add": true,
+      "type": "vagrant"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "../ansible/playbook.yml",
+      "user": "vagrant",
+      "extra_arguments": [ 
+        "--extra-vars",
+        "nomad_version={{user `nomad_version`}} consul_version={{user `consul_version`}}"
+      ]
+    }
+  ]
+}

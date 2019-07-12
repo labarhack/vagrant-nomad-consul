@@ -1,0 +1,14 @@
+datacenter = "dc1"
+data_dir = "/var/opt/consul"
+#encrypt = "FIXME"
+#retry_join = ["FIXME"]
+
+performance {
+  raft_multiplier = 1
+}
+
+server = true
+ui = true
+bootstrap_expect = 1
+bind_addr = "{{ consul_addr }}"
+client_addr = "{{ consul_addr }}"

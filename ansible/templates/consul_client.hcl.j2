@@ -1,0 +1,8 @@
+datacenter = "dc1"
+
+# Setup data dir
+data_dir = "/var/opt/consul"
+#encrypt = "FIXME"
+
+retry_join = ["{{ consul_addr }}"]
+bind_addr = "{{ nomad_addr }}"

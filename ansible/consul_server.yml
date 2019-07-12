@@ -1,0 +1,35 @@
+---
+- name: Playbook for Consul server
+  hosts: all
+  become: yes
+  #gather_facts: false
+
+  #  pre_tasks:
+  #  - name: Install python2 for Ansible
+  #    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+  #    register: output
+  #    changed_when: output.stdout != ""
+  #  - name: Gathering Facts
+  #    setup:
+  #
+  tasks:
+  #  # Update distro
+  #  - name: update apt
+  #    apt:
+  #      update_cache: yes
+
+  # Configure Consul server
+  - name: Configure Consul server
+    template: src=templates/consul_server.hcl.j2 dest=/etc/consul.d/server.hcl
+  - name: Start Consul server
+    systemd: 
+      name: consul
+      state: started
+
+  # Cleanup
+  #  - name: Remove useless packages from the cache
+  #    apt:
+  #      autoclean: yes
+  #  - name: Remove dependencies that are no longer required
+  #    apt:
+  #      autoremove: yes

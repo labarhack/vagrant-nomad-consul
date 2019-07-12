@@ -1,0 +1,5 @@
+{
+  "_comment": "build with `packer build -var-file=bionic64.json ubuntu.json`",
+  "box": "ubuntu/bionic64",
+  "name": "ubuntu_bionic64"
+}

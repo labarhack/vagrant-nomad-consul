@@ -1,0 +1,19 @@
+# Listen
+bind_addr = "{{ nomad_addr }}"
+
+# Increase log verbosity
+log_level = "DEBUG"
+
+# Setup data dir
+data_dir = "/var/opt/nomad"
+
+# Auto join by consul
+consul {
+  address = "http://localhost:8500"
+}
+
+# Enable the client
+client {
+  enabled = true
+  network_interface = "enp0s8"
+}

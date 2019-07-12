@@ -1,0 +1,35 @@
+---
+- name: Playbook Nomad server
+  hosts: all
+  become: yes
+  #gather_facts: false
+
+  #  pre_tasks:
+  #  - name: Install python2 for Ansible
+  #    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+  #    register: output
+  #    changed_when: output.stdout != ""
+  #  - name: Gathering Facts
+  #    setup:
+  #
+  tasks:
+  #  # Update distro
+  #  - name: update apt
+  #    apt:
+  #      update_cache: yes
+
+  # Configure Nomad server
+  - name: Configure Nomad server
+    template: src=templates/nomad_server.hcl.j2 dest=/etc/nomad.d/server.hcl
+  - name: Start Nomad server
+    systemd: 
+      name: nomad
+      state: started
+
+  # Cleanup
+  #  - name: Remove useless packages from the cache
+  #    apt:
+  #      autoclean: yes
+  #  - name: Remove dependencies that are no longer required
+  #    apt:
+  #      autoremove: yes

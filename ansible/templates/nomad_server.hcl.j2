@@ -1,0 +1,24 @@
+bind_addr = "{{ nomad_addr }}"
+
+advertise {
+   http = "{{ nomad_addr }}"
+   rpc =  "{{ nomad_addr }}"
+   serf = "{{ nomad_addr }}"
+}
+
+# Increase log verbosity
+log_level = "DEBUG"
+
+# Setup data dir
+data_dir = "/var/opt/nomad"
+
+# Auto join by consul
+consul {
+    address = "{{ consul_addr }}:8500"
+}
+
+# Enable the server
+server {
+    enabled = true
+    bootstrap_expect = 1
+}
