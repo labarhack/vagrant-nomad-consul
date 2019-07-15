@@ -1,19 +1,19 @@
 # Vagrant Nomad cluster
 [![Open Source Helpers](https://www.codetriage.com/labarhack/vagrant-nomad-consul/badges/users.svg)](https://www.codetriage.com/labarhack/vagrant-nomad-consul)
 
-Start nomad cluster with single consul server (auto join).
+Start nomad cluster with consul server (auto join).
 
 ## Prerequisites
 
 * VirtualBox Version 6.0
 * Vagrant 2.2.5
-* Ansible 2.8.1
+* Ansible 2.8.2
 
 ## Setup
 
 ```
-export NOMAD_SERVER_COUNT=1
-export NOMAD_CLIENT_COUNT=1
+export SERVER_COUNT=1
+export CLIENT_COUNT=1
 ```
 ## Build vagrant box
 
@@ -29,9 +29,10 @@ vagrant up
 vagrant status
 Current machine states:
 
-consul_server_1           running (virtualbox)
-nomad_server_1            running (virtualbox)
-nomad_client_1            running (virtualbox)
+server_1           running (virtualbox)
+server_2            running (virtualbox)
+client_1            running (virtualbox)
+client_2            running (virtualbox)
 
 This environment represents multiple VMs. The VMs are all listed
 above with their current state. For more information about a specific
@@ -51,24 +52,32 @@ export CONSUL_HTTP_ADDR=http://localhost:8500
 
 nomad node status
 ID        DC   Name            Class   Drain  Eligibility  Status
-0022caa5  dc1  nomad-client-1  <none>  false  eligible     ready
+75b086ab  dc1  client-2  <none>  false  eligible     ready
+e0775890  dc1  client-1  <none>  false  eligible     ready
+
 
 nomad server members
 Name                   Address        Port  Status  Leader  Protocol  Build  Datacenter  Region
-nomad-server-1.global  192.168.50.61  4648  alive   true    2         0.9.3  dc1         global
+server-1.global  192.168.50.61  4648  alive   true    2         0.9.3  dc1         global
+server-2.global  192.168.50.62  4648  alive   false   2         0.9.3  dc1         global
+
 
 consul members
 Node             Address             Status  Type    Build  Protocol  DC   Segment
-consul-server-1  192.168.50.50:8301  alive   server  1.5.2  2         dc1  <all>
+server-1  192.168.50.61:8301  alive   server  1.5.2  2         dc1  <all>
+server-2  192.168.50.62:8301  alive   server  1.5.2  2         dc1  <all>
+client-1  192.168.50.81:8301  alive   client  1.5.2  2         dc1  <default>
+client-2  192.168.50.82:8301  alive   client  1.5.2  2         dc1  <default>
+
 
 nomad job run nomad/echo-server.nomad
-==> Monitoring evaluation "803d2976"
+==> Monitoring evaluation "56535392"
     Evaluation triggered by job "echo-server"
-    Allocation "1514d3b8" created: node "087dc8b3", group "sample"
+    Allocation "69708195" created: node "e0775890", group "sample"
     Evaluation status changed: "pending" -> "complete"
-==> Evaluation "803d2976" finished with status "complete"
+==> Evaluation "56535392" finished with status "complete"
 
 nomad job status
 ID           Type     Priority  Status   Submit Date
-echo-server  service  50        running  2019-07-08T15:25:43+02:00
+echo-server  service  50        running  2019-07-15T11:38:04+02:00
 ```

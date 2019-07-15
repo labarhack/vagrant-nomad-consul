@@ -1,5 +1,5 @@
 ---
-- name: Playbook for Consul server
+- name: Playbook for Nomad/Consul server
   hosts: all
   become: yes
   #gather_facts: false
@@ -18,6 +18,13 @@
   #    apt:
   #      update_cache: yes
 
+  # Configure Nomad server
+  - name: Configure Nomad server
+    template: src=templates/nomad_server.hcl.j2 dest=/etc/nomad.d/server.hcl
+  - name: Start Nomad server
+    systemd: 
+      name: nomad
+      state: started
   # Configure Consul server
   - name: Configure Consul server
     template: src=templates/consul_server.hcl.j2 dest=/etc/consul.d/server.hcl

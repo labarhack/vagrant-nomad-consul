@@ -1,9 +1,9 @@
-bind_addr = "{{ nomad_addr }}"
+bind_addr = "{{ server_addr }}"
 
 advertise {
-   http = "{{ nomad_addr }}"
-   rpc =  "{{ nomad_addr }}"
-   serf = "{{ nomad_addr }}"
+   http = "{{ server_addr }}"
+   rpc =  "{{ server_addr }}"
+   serf = "{{ server_addr }}"
 }
 
 # Increase log verbosity
@@ -14,11 +14,11 @@ data_dir = "/var/opt/nomad"
 
 # Auto join by consul
 consul {
-    address = "{{ consul_addr }}:8500"
+    address = "{{ server_addr }}:8500"
 }
 
 # Enable the server
 server {
     enabled = true
-    bootstrap_expect = 1
+    bootstrap_expect = {{ server_count }}
 }
