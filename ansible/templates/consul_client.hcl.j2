@@ -4,5 +4,9 @@ datacenter = "dc1"
 data_dir = "/var/opt/consul"
 #encrypt = "FIXME"
 
-retry_join = ["{{ consul_addr }}"]
-bind_addr = "{{ nomad_addr }}"
+{% for i in range (server_count) %}
+retry_join = [
+  "192.168.50.6{{ i }}",
+]
+{% endfor %}
+bind_addr = "{{ server_addr }}"

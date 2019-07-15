@@ -9,6 +9,10 @@ performance {
 
 server = true
 ui = true
-bootstrap_expect = 1
-bind_addr = "{{ consul_addr }}"
-client_addr = "{{ consul_addr }}"
+bootstrap_expect = {{ server_count }}
+bind_addr = "{{ server_addr }}"
+client_addr = "{{ server_addr }}"
+
+{% if bootstrap is sameas false %}
+retry_join = ["192.168.50.61"]
+{% endif %}
