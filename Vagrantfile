@@ -2,8 +2,8 @@
 # vi: set ft=ruby :
 
 BOX_NAME = ENV['BOX_NAME'] || "labarhack/nomad_consul_20190702.0"
-SERVER_COUNT= ENV['SERVER_COUNT'] || 2
-CLIENT_COUNT= ENV['CLIENT_COUNT'] || 2
+SERVER_COUNT= ENV['SERVER_COUNT'] || 1
+CLIENT_COUNT= ENV['CLIENT_COUNT'] || 1
 
 Vagrant.configure("2") do |config|
 

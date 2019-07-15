@@ -12,8 +12,8 @@ Start nomad cluster with consul server (auto join).
 ## Setup
 
 ```
-export SERVER_COUNT=1
-export CLIENT_COUNT=1
+export SERVER_COUNT=1 # default: 1
+export CLIENT_COUNT=1 # default: 1
 ```
 ## Build vagrant box
 
