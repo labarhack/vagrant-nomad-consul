@@ -1,5 +1,5 @@
 # Vagrant Nomad cluster
-[![Open Source Helpers](https://www.codetriage.com/labarhack/vagrant-nomad-consul/badges/users.svg)](https://www.codetriage.com/labarhack/vagrant-nomad-consul)
+[![Open Source Helpers](https://www.codetriage.com/labarhack/vagrant-nomad-consul/badges/users.svg)](https://www.codetriage.com/labarhack/vagrant-nomad-consul) [![CircleCI](https://circleci.com/gh/labarhack/vagrant-nomad-consul.svg?style=svg)](https://circleci.com/gh/labarhack/vagrant-nomad-consul)
 
 Start nomad cluster with consul server (auto join).
 
